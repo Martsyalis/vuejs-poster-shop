@@ -1,20 +1,20 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var server = require('http').createServer(app);
-var axios = require('axios');
-var querystring = require('querystring');
+const express = require('express');
+const app = express();
+const path = require('path');
+const server = require('http').createServer(app);
+const axios = require('axios');
+const querystring = require('querystring');
 
 require('dotenv').config();
 
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 app.use( bodyParser.json() );
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-var instance = axios.create({
+const instance = axios.create({
   baseURL: 'https://api.imgur.com/3/',
   headers: { 'Authorization': 'Client-ID ' + process.env.IMGUR_CLIENT_ID }
 });
@@ -27,7 +27,7 @@ app.get('/search/:query', function(req, res) {
     })
     .catch(function (error) {
       console.log(error);
-    })
+    })  
   ;
 });
 
